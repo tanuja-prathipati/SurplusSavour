@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Donor Registration Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+            width: 90%;
+            margin: auto;
+        }
+
+        .registration-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 50%;
+            margin: auto;
+        }
+
+        .registration-form label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .registration-form input,
+        .registration-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .registration-form button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .registration-form button:hover {
+            background-color: #555;
+        }
+
+        .login-message {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .alert {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Food Donor Registration Form</h1>
+    </header>
+
+    <!-- Food Donor Registration Form -->
+    <div class="registration-form" id="foodDonorRegistrationForm">
+        <h2>Food Donor Registration</h2>
+        <form id="foodDonorRegistrationForm" action="">
+            <label for="foodDonorName">Food Donor Name</label>
+            <input type="text" id="foodDonorName" name="foodDonorName" pattern="[A-Za-z ]+" required
+                oninvalid="setCustomValidity('Only alphabets and spaces are allowed. No special characters or numerics.')"
+                oninput="setCustomValidity('')">
+
+            <label for="ownerName">Owner Name</label>
+            <input type="text" id="ownerName" name="ownerName" pattern="[A-Za-z ]+" required
+                oninvalid="setCustomValidity('Only alphabets and spaces are allowed. No special characters or numerics.')"
+                oninput="setCustomValidity('')">
+
+            <label for="phoneNumber">Phone Number (Enter a 10-digit number)</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" required
+                oninvalid="setCustomValidity('Only numeric characters are allowed. No special characters or alphabets.')"
+                oninput="setCustomValidity('')">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password (Minimum 6 characters)</label>
+            <input type="password" id="foodDonorPassword" name="password" minlength="6" required>
+
+            <label for="confirmPassword">Confirm Password (Minimum 6 characters)</label>
+            <input type="password" id="confirmFoodDonorPassword" name="confirmPassword" minlength="6" required>
+
+            <label for="address">Address (Max 40 characters)</label>
+            <input type="text" id="address" name="address" maxlength="40" required>
+
+            <label for="proofDocument">Aadhaar Number</label>
+            <input type="text" id="proofDocument" name="proofDocument" maxLength="12" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="fb.js"> </script>
+    </body>
+    </html>

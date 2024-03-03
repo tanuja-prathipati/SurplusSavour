@@ -1,1 +1,152 @@
-h
+h<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Receiver Registration Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+            width: 90%;
+            margin: auto;
+        }
+
+        .registration-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 50%;
+            margin: auto;
+        }
+
+        .registration-form label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .registration-form input,
+        .registration-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .registration-form button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .registration-form button:hover {
+            background-color: #555;
+        }
+
+        .login-message {
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Food Receiver Registration Form</h1>
+    </header>
+
+    <!-- Food Receiver Registration Form -->
+    <div class="registration-form" id="foodReceiverRegistrationForm">
+        <h2>Food Receiver Registration</h2>
+        <form id="foodReceiverRegistrationForm" action="" onsubmit="return validateRegistrationForm('foodReceiver')">
+            <label for="foodReceiverName">Food Receiver Name</label>
+            <input type="text" id="foodReceiverName" name="foodReceiverName" pattern="[A-Za-z ]+" required
+                oninvalid="setCustomValidity('Only alphabets and spaces are allowed. No special characters or numerics.')"
+                oninput="setCustomValidity('')">
+
+            <label for="contactPerson">Contact Person Name</label>
+            <input type="text" id="contactPerson" name="contactPerson" pattern="[A-Za-z ]+" required
+                oninvalid="setCustomValidity('Only alphabets and spaces are allowed. No special characters or numerics.')"
+                oninput="setCustomValidity('')">
+
+            <label for="foodReceiverPhoneNumber">Phone Number (Enter a 10-digit number)</label>
+            <input type="tel" id="foodReceiverPhoneNumber" name="foodReceiverPhoneNumber" pattern="[0-9]{10}" required
+                oninvalid="setCustomValidity('Only numeric characters and a 10-digit number are allowed.')"
+                oninput="setCustomValidity('')">
+
+            <label for="foodReceiverEmail">Email</label>
+            <input type="email" id="foodReceiverEmail" name="foodReceiverEmail" required>
+
+            <label for="foodReceiverPassword">Password (Minimum 6 characters)</label>
+            <input type="password" id="foodReceiverPassword" name="foodReceiverPassword" minlength="6" required>
+
+            <label for="confirmFoodReceiverPassword">Confirm Password (Minimum 6 characters)</label>
+            <input type="password" id="confirmFoodReceiverPassword" name="confirmFoodReceiverPassword" minlength="6" required
+                oninput="validatePasswordMatch('foodReceiver')">
+
+            <label for="foodReceiverAddress">Address (Max 40 characters)</label>
+            <input type="text" id="foodReceiverAddress" name="foodReceiverAddress" maxlength="40" required>
+
+            <label for="proofDocument">Aadhaar Number</label>
+            <input type="text" id="proofDocument" name="proofDocument" maxLength="12" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+<!--
+    <script>
+        function validateRegistrationForm(type) {
+            var password = document.getElementById(type + "Password").value;
+            var confirmPassword = document.getElementById("confirm" + type + "Password").value;
+
+            if (password.length < 6 || confirmPassword.length < 6) {
+                alert("Passwords should be at least 6 characters long. Please re-enter.");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please re-enter.");
+                return false;
+            }
+
+            document.getElementById("loginMessage").innerText = "Registered successfully!";
+            localStorage.setItem("isRegistered", true);
+            document.getElementById("foodReceiverRegistrationForm").style.display = "none";
+            return false;
+        }
+
+        function validatePasswordMatch(type) {
+            var password = document.getElementById(type + "Password").value;
+            var confirmPassword = document.getElementById("confirm" + type + "Password").value;
+            var confirmationMessage = document.getElementById("loginMessage");
+
+            if (password !== confirmPassword) {
+                confirmationMessage.innerText = "Passwords do not match. Please re-enter.";
+            } else {
+                confirmationMessage.innerText = "";
+            }
+        }
+    </script>
+-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="receiver.js"> </script>
+</body>
+
+</html>

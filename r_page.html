@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receiver Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'PP mori', sans-serif;
+            background-color: #FFFFFF;
+            color: #FFFFFF;
+        }
+
+        header {
+            background-color: #3C3B3B;
+            padding: 1em;
+            text-align: center;
+            margin-bottom: 0;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .dashboard {
+            margin: 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .dashboard.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dashboard h2 {
+            font-size: 24px;
+            color: #0B0000;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .dashboard p {
+            font-size: 18px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .dashboard .side-heading {
+            font-size: 14px;
+            color: #0B0000;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .dashboard p#receiver-phone {
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+
+        .food-details-heading {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0B0000;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .food-details {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .food-details p {
+            margin-bottom: 5px;
+            font-size: 18px;
+            color: #000000;
+        }
+
+        .dashboard button {
+            background-color: #CF1717;
+            color: #ecf0f1;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            margin-right: 10px;
+        }
+
+        .dashboard button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Food Receiver Profile</h1>
+    </header>
+
+    <div class="dashboard" id="dashboard">
+
+        <!-- Food Details Heading -->
+        <div class="food-details-heading"><p style="font-size:25px">Food Details from Donors:</p></div>
+
+        <!-- Food Details from Donors -->
+        <div class="food-details" id="food-details">
+            <!-- Food details from donors will be dynamically added here -->
+        </div>
+
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        // Function to perform logout
+        function logout() {
+            window.location.href = "receiver_login.html";
+        }
+
+        // Function to handle receiving food details from donors
+        function receiveFoodDetails(phonenum, type, quantity, pickuptime) {
+            var foodDetailsDiv = document.getElementById('food-details');
+            var foodDetailsParagraph = document.createElement('p');
+            foodDetailsParagraph.innerHTML = 
+                `<div style="margin-top:20px">
+                    <p>Phone Number: ${phonenum}</p>
+                    <p>Food Type: ${type}</p>
+                    <p>Quantity: ${quantity}</p>
+                    <p>Pickup Time: ${pickuptime}</p>
+                    <hr>
+                </div>`;
+            foodDetailsDiv.appendChild(foodDetailsParagraph);
+        }
+
+        window.onload = function () {
+            var dashboard = document.getElementById("dashboard");
+            dashboard.classList.add("show");
+            var retrievedDonors = [];
+            // Retrieve data from the database
+            var foodDetailsRef = database.ref('dpage');
+            foodDetailsRef.on('value', function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    var childData = childSnapshot.val();
+                    if (!retrievedDonors.includes(childData.phonenum)) {
+                        retrievedDonors.push(childData.phonenum);
+                        // childData will contain each data object from the database
+                        console.log(childData);
+                        // you can display this data on your page using JavaScript
+                        receiveFoodDetails(childData.phonenum, childData.type, childData.quantity, childData.pickuptime);
+                    }
+                });
+            });
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyB8l7iDRkWAKGWAaAv_IdtEf1mWJKXZPpE",
+            authDomain: "dpage-fb17a.firebaseapp.com",
+            databaseURL: "https://dpage-fb17a-default-rtdb.firebaseio.com",
+            projectId: "dpage-fb17a",
+            storageBucket: "dpage-fb17a.appspot.com",
+            messagingSenderId: "337462984494",
+            appId: "1:337462984494:web:c322bd9db9f1156ee3c4bf"
+        };
+      
+        firebase.initializeApp(firebaseConfig);
+      
+        // Reference to the database
+        var database = firebase.database();
+    </script>
+</body>
+</html>

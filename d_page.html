@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'PP mori', sans-serif;
+            background-color: #FFFFFF;
+            color: #FFFFFF;
+        }
+
+        header {
+            background-color: #3C3B3B;
+            padding: 1em;
+            text-align: center;
+            margin-bottom: 0;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .dashboard {
+            margin: 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .dashboard.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dashboard h2 {
+            font-size: 24px;
+            color: #0B0000;
+            margin-bottom: 10px;
+        }
+
+        .dashboard p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .food-input {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .food-input label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: #e74c3c;
+        }
+
+        .food-input input {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #2c3e50;
+            background-color: #ecf0f1;
+        }
+
+        .dashboard button {
+            background-color: #CF1717;
+            color: #ecf0f1;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .dashboard button:hover {
+            background-color: #2980b9;
+        }
+
+        .dashboard .submit-button {
+            background-color: #27ae60;
+            color: #ecf0f1;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .dashboard .submit-button:hover {
+            background-color: #219651;
+        }
+    </style>
+    <script>
+
+ </script>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to the Dashboard</h1>
+    </header>
+
+    <div class="dashboard" id="dashboard">
+        <h2>Food Donor Profile</h2>
+        
+        <p id="name"> Phone Number:  <span id="nameValue"></span></p>
+
+        <form id="loginForm">
+            <div class="food-input">
+                <label for="phonenum">Enter Phone Number</label>
+                <input type="text" id="phonenum" name="phonenum" placeholder="Enter Phone Number">
+            </div>
+            <div class="food-input">
+                <label for="available-food">Type of Food Available</label>
+                <input type="text" id="available-food" name="available_food" placeholder="Enter Available Food">
+            </div>
+
+            <div class="food-input">
+                <label for="quantity">Quantity of Food Packets</label>
+                <input type="number" id="quantity" name="quantity" min="0">
+            </div>
+
+            <div class="food-input">
+                <label for="pickuptime">Estimated Pickup Time</label>
+                <input type="time" id="pickuptime" name="pickuptime">
+            </div>
+
+            <button class="submit-button" onclick="submitForm()">Submit</button>
+            <button onclick="logout()">Logout</button>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="dstore.js"></script>
+
+    <script>
+        // Function to perform logout
+        function logout() {
+            alert("Logged out successfully!");
+            window.location.href = "donor_login.html";
+        }
+
+        // Function to handle form submission (you can modify this function as needed)
+        function submitForm() {
+            alert("Form submitted successfully!");
+        }
+
+        window.onload = function () {
+            var dashboard = document.getElementById("dashboard");
+            dashboard.classList.add("show");
+        };
+    </script>
+</body>
+
+</html>
